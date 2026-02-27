@@ -22,6 +22,6 @@ cmake ${CMAKE_ARGS} \
 make
 make install
 
-if [[ "${CONDA_BUILD_CROSS_COMPILATION}" != "1" ]]; then
+if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" || "${CROSSCOMPILING_EMULATOR}" != "" ]]; then
   ctest --verbose
 fi
