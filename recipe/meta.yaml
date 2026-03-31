@@ -29,7 +29,6 @@ requirements:
     - libnetcdf
     - libpng
     - nceplibs-ip
-    - nceplibs-sp
     - zlib
     - jasper
   run:
