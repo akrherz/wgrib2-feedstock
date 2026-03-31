@@ -37,6 +37,7 @@ requirements:
     - mysql-libs
     - libaec
     - libnetcdf
+    - nceplibs-ip
     - libpng
     - zlib
     - jasper
