@@ -8,9 +8,12 @@ source:
   fn: wgrib2_nolib.tgz
   url: https://github.com/NOAA-EMC/wgrib2/archive/refs/tags/v{{ version }}.tar.gz
   sha256: 39faebada36da5457c75f0980bb68fa299b221b3e6b335bb7d29006a35830c54
+  patches:
+    # NOAA-EMC/wgrib2/510
+    - gh510_posix.patch
 
 build:
-  number: 4
+  number: 5
   skip: true  # [win]
   detect_binary_files_with_prefix: true
 
@@ -28,6 +31,7 @@ requirements:
     - libaec
     - libnetcdf
     - libpng
+    - nceplibs-ip
     - zlib
     - jasper
   run:
@@ -35,6 +39,7 @@ requirements:
     - mysql-libs
     - libaec
     - libnetcdf
+    - nceplibs-ip
     - libpng
     - zlib
     - jasper

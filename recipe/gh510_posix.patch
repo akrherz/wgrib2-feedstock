@@ -1,0 +1,13 @@
+--- wgrib2-3.8.0.orig/tests/run_ipolates_tests.sh	2026-04-01 05:46:56.974238052 -0500
++++ wgrib2-3.8.0/tests/run_ipolates_tests.sh	2026-04-01 05:48:36.709518380 -0500
+@@ -25,8 +25,8 @@
+ echo "*** Testing new_grid on file in incorrect order. This will return an incomplete output file and error message."
+ ../wgrib2/wgrib2 new_grid_test.grb -match ":UGRD:" -grib_out test_badorder.grb
+ ../wgrib2/wgrib2 new_grid_test.grb -match ":VGRD:" -append -grib_out test_badorder.grb
+-{ out_err=$(../wgrib2/wgrib2 test_badorder.grb -new_grid_winds grid  \
+-    -new_grid latlon 0:360:1 00:91:1 junk_badorder.grb 2>&1 1>&$out); } {out}>&1
++out_err=$(../wgrib2/wgrib2 test_badorder.grb -new_grid_winds grid  \
++    -new_grid latlon 0:360:1 00:91:1 junk_badorder.grb 3>&1 1>&2 2>&3 3>&-)
+ if [[ -z "$out_err" ]]; then 
+     exit 10
+ fi

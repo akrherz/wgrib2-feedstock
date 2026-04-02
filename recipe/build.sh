@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export LDFLAGS="-lg2c -ljasper -lnetcdf -lpng -lmysqlclient -lsz -lz -lm -fopenmp $LDFLAGS"
+export LDFLAGS="-lg2c -ljasper -lnetcdf -lpng -lmysqlclient -lsz -lz -lm -lip_d -fopenmp $LDFLAGS"
 export CFLAGS="-I.. -I$PREFIX/include/mysql -fopenmp $CFLAGS"
 
 mkdir bld
@@ -11,6 +11,7 @@ cmake ${CMAKE_ARGS} \
   -DMAKE_FTN_API=ON \
   -DUSE_G2CLIB_HIGH=ON \
   -DUSE_G2CLIB_LOW=ON \
+  -DUSE_IPOLATES=ON \
   -DUSE_JPEG=ON \
   -DUSE_MYSQL=ON \
   -DUSE_NETCDF=ON \
