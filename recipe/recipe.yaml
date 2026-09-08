@@ -1,12 +1,14 @@
-{% set version = "3.8.0" %}
+schema_version: 1
+
+context:
+  version: "3.8.0"
 
 package:
   name: wgrib2
-  version: {{ version }}
+  version: ${{ version }}
 
 source:
-  fn: wgrib2_nolib.tgz
-  url: https://github.com/NOAA-EMC/wgrib2/archive/refs/tags/v{{ version }}.tar.gz
+  url: https://github.com/NOAA-EMC/wgrib2/archive/refs/tags/v${{ version }}.tar.gz
   sha256: 39faebada36da5457c75f0980bb68fa299b221b3e6b335bb7d29006a35830c54
   patches:
     # NOAA-EMC/wgrib2/510
@@ -14,15 +16,16 @@ source:
 
 build:
   number: 7
-  skip: true  # [win]
-  detect_binary_files_with_prefix: true
+  skip: win
+  prefix_detection:
+    ignore_binary_files: false
 
 requirements:
   build:
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
-    - {{ compiler('fortran') }}
-    - {{ stdlib("c") }}
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - ${{ compiler('fortran') }}
+    - ${{ stdlib("c") }}
     - cmake
     - make
   host:
@@ -44,18 +47,18 @@ requirements:
     - zlib
     - jasper
 
-test:
-  files:
-    - file.grib2
-  commands:
-    # - wgrib2 -config # works but the return code !=0
-    - wgrib2 file.grib2 -netcdf out.nc
+tests:
+  - files:
+      recipe:
+        - file.grib2
+    script:
+      - wgrib2 file.grib2 -netcdf out.nc
 
 about:
-  home: http://www.cpc.ncep.noaa.gov/products/wesley/wgrib2
   license: GPL-2.0-or-later
   license_file: wgrib2/LICENSE-wgrib2
   summary: Utility to read and write grib2 files
+  homepage: http://www.cpc.ncep.noaa.gov/products/wesley/wgrib2
 
 extra:
   recipe-maintainers:
